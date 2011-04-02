@@ -1,16 +1,14 @@
-module Euler25 where
+module Main where
 
-fib 0 = 0
-fib 1 = 1
-fib n = fib (n - 1) + (fib (n - 2))
+fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
-returnFirstFibonacciWithLength :: Int -> Integer
-returnFirstFibonacciWithLength desiredLength = find' 0
+returnOrdinalOfFirstFibonacciWithLength :: Int -> Int
+returnOrdinalOfFirstFibonacciWithLength desiredLength = find' 0
   where
-    find' n | numberLength (fib n) == desiredLength = n
-            | otherwise                             = find' (n + 1)
+    find' n | numberLength (fibs!!n) == desiredLength = n
+            | otherwise                               = find' (n + 1)
 
 numberLength :: Integer -> Int
 numberLength = length . show
 
-main = putStr (show (returnFirstFibonacciWithLength 1000))
+main = putStr (show (returnOrdinalOfFirstFibonacciWithLength 1000))
