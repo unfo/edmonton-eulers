@@ -5,10 +5,7 @@ returnOrdinalOfFirstFibonacciWithLength 1 = 1
 returnOrdinalOfFirstFibonacciWithLength length = find 3 1 2
   where
     find ordinal previous current
-      | numberLength current == length = ordinal
-      | otherwise                      = find (ordinal + 1) current (previous + current)
-
-numberLength :: Integer -> Int
-numberLength = length . show
+      | current >= 10 ^ (length - 1) = ordinal
+      | otherwise                    = find (ordinal + 1) current (previous + current)
 
 main = putStr (show (returnOrdinalOfFirstFibonacciWithLength 1000))
