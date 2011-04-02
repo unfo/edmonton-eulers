@@ -1,12 +1,12 @@
 module Main where
 
-fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-
 returnOrdinalOfFirstFibonacciWithLength :: Int -> Int
-returnOrdinalOfFirstFibonacciWithLength desiredLength = find' 0
+returnOrdinalOfFirstFibonacciWithLength 1 = 1
+returnOrdinalOfFirstFibonacciWithLength length = find 3 1 2
   where
-    find' n | numberLength (fibs!!n) == desiredLength = n
-            | otherwise                               = find' (n + 1)
+    find ordinal previous fibonacci
+      | numberLength fibonacci == length = ordinal
+      | otherwise                        = find (ordinal + 1) fibonacci (previous + fibonacci)
 
 numberLength :: Integer -> Int
 numberLength = length . show
