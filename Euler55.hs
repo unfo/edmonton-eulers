@@ -21,13 +21,13 @@ revInt :: Integer -> Integer
 revInt i = read (reverse (show i))::Integer
 
 reverseAndAdd :: Integer -> Integer
-reverseAndAdd i = i + (revInt i)
+reverseAndAdd i = i + revInt i
 
 recursionLimit = 50
 
 
 isPalindrome :: Integer -> Bool
-isPalindrome i = i == (revInt i)
+isPalindrome i = i == revInt i
 
 isLychrel :: Integer -> Bool
 isLychrel i = findPalindromeUpToLimit (reverseAndAdd i) 0 recursionLimit
@@ -36,3 +36,6 @@ isLychrel i = findPalindromeUpToLimit (reverseAndAdd i) 0 recursionLimit
       | isPalindrome number = True
       | iteration < limit   = findPalindromeUpToLimit (reverseAndAdd number) (iteration + 1) recursionLimit
       | otherwise           = False 
+
+lychrels = [x | x <- [1..9999], isLychrel x]
+main = putStr (show (length lychrels))
