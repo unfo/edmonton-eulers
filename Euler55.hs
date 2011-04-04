@@ -33,9 +33,9 @@ isLychrel :: Integer -> Bool
 isLychrel i = findPalindromeUpToLimit (reverseAndAdd i) 0 recursionLimit
   where 
     findPalindromeUpToLimit number iteration limit 
-      | isPalindrome number = True
-      | iteration < limit   = findPalindromeUpToLimit (reverseAndAdd number) (iteration + 1) recursionLimit
-      | otherwise           = False 
+      | isPalindrome number = False 
+      | iteration < limit   = findPalindromeUpToLimit (reverseAndAdd number) (iteration + 1) limit
+      | otherwise           = True 
 
-lychrels = [x | x <- [1..9999], isLychrel x]
+lychrels = [x | x <- [0..9999], isLychrel x]
 main = putStr (show (length lychrels))
